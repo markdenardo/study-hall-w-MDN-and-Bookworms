@@ -1,4 +1,4 @@
-
-  tracks/                                                                     
-  .DS_Store                                                                   
-
+tracks/
+raw-source/
+archive/
+.DS_Store

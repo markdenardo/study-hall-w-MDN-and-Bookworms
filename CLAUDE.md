@@ -1,15 +1,25 @@
 # SH-MDN-BW — Music Data Analysis
 
+## Project layout
+All binary audio lives under this folder now (previously the raw file sat one level up); none of it is committed to git — see `.gitignore`.
+
+| Path | Contents | Size | In git? |
+|---|---|---|---|
+| `raw-source/2025-10-26_0303_raw_recording.wav` | Original unedited recorder output (renamed from `261025_0303.WAV` — see Source file below) | 1.4 GB | No |
+| `tracks/` | 276 speech-free slices, Roman-numeral filenames (`I.wav` … `CCLXXVI.wav`) | 992 MB | No |
+| `archive/SH-MDN-BW_speech-free-tracks.zip` | Zipped copy of `tracks/` + docs, uploaded to Drive (link below) | 792 MB | No |
+| `CLAUDE.md`, `tracklist.txt`, `.gitignore` | Documentation | — | Yes |
+
 ## Audio files
-The 276 extracted WAV tracks (`tracks/`, ~992MB) are **not** stored in this repo — GitHub isn't suited to hosting binary audio at this scale. They were zipped (`SH-MDN-BW-tracks.zip`, ~792MB) and uploaded manually to Google Drive:
+The 276 extracted WAV tracks and the raw source recording are **not** stored in the GitHub repo — GitHub isn't suited to hosting binary audio at this scale. The zip of tracks + docs was uploaded manually to Google Drive:
 
 **https://drive.google.com/file/d/1ZkTLlsgdJd4thhfVXe_8gx6T4GBNU_D0/view?usp=drive_link**
 
-This repo contains only the documentation and tracklist.
+The GitHub repo contains only the documentation and tracklist.
 
 ## Source file
-- **File:** `261025_0303.WAV` (located in parent folder, not moved — 1.4 GB)
-- **Filename pattern:** `261025_0303` suggests a date/time stamp — `26-10-25` (26 Oct 2025) at `03:03`, consistent with a field/live recorder auto-naming convention (e.g. Zoom, Tascam, Sound Devices).
+- **File:** `raw-source/2025-10-26_0303_raw_recording.wav` (renamed from the recorder's original auto-generated name `261025_0303.WAV` for clarity; moved into this project folder — 1.4 GB)
+- **Original filename pattern:** `261025_0303` was a date/time stamp — `26-10-25` (26 Oct 2025) at `03:03`, consistent with a field/live recorder auto-naming convention (e.g. Zoom, Tascam, Sound Devices).
 
 ## Technical properties
 | Property | Value |
@@ -36,7 +46,6 @@ This repo contains only the documentation and tracklist.
 
 ## Suggested next steps
 - If this is a live set, consider normalizing loudness (e.g. to −16 LUFS) and trimming any clipped peak for a listenable export.
-- Confirm whether the original file should be moved into this folder or left in place (currently left untouched in the parent directory).
 
 ---
 
@@ -101,3 +110,10 @@ Ran voice activity detection (VAD) across the full file to isolate every stretch
 **12:05** — Cleanup: removed intermediate working files no longer needed — `vad_raw_output.txt` (raw VAD stdout dump), `speech_segments_raw.json`, `music_segments.json` (intermediate Python data), `extract_log.txt` (per-track ffmpeg status log), and the temporary `models/` folder (VAD model binary, not needed after extraction finished). Final `CLAUDE.md` rewritten to document the extraction methodology and caveats.
 
 **Caveats carried forward (unverified):** VAD may miss speech buried under loud music, or misclassify singing as speech; the 276 tracks have not been manually spot-checked for leakage at segment edges.
+
+**12:08** — User asked to clean up project file naming ("raw files etc, figure it out"). Reviewed the full tree and made two changes:
+- `261025_0303.WAV` → `SH-MDN-BW/raw-source/2025-10-26_0303_raw_recording.wav` — moved the raw file from the parent directory into the project folder and gave it a self-describing name (was the recorder's cryptic auto-generated name; date/time meaning was previously only documented in prose, not encoded in a readable filename).
+- `SH-MDN-BW-tracks.zip` (sitting loose in the parent directory) → `SH-MDN-BW/archive/SH-MDN-BW_speech-free-tracks.zip` — consolidated into the project folder under a clearly-labeled `archive/` subfolder.
+- Updated `.gitignore` to also exclude `raw-source/` and `archive/` (both large binaries, same reasoning as `tracks/`).
+- Left `tracks/I.wav` … `CCLXXVI.wav` untouched — that pure-Roman-numeral scheme was an explicit user decision earlier in the project, not an oversight.
+- Did not rename the enclosing `Desktop/untitled folder` directory itself — it's the active working directory for this session, and renaming it out from under an in-progress session risks breaking path references; flagged to user as a separate decision rather than done silently.
