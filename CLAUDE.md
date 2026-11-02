@@ -1,7 +1,11 @@
 # SH-MDN-BW — Music Data Analysis
 
 ## Audio files
-The 276 extracted WAV tracks (`tracks/`, ~992MB) are **not** stored in this repo — GitHub isn't suited to hosting binary audio at this scale. They were zipped (`SH-MDN-BW-tracks.zip`, ~792MB) and uploaded manually to Google Drive. This repo contains only the documentation and tracklist.
+The 276 extracted WAV tracks (`tracks/`, ~992MB) are **not** stored in this repo — GitHub isn't suited to hosting binary audio at this scale. They were zipped (`SH-MDN-BW-tracks.zip`, ~792MB) and uploaded manually to Google Drive:
+
+**https://drive.google.com/file/d/1ZkTLlsgdJd4thhfVXe_8gx6T4GBNU_D0/view?usp=drive_link**
+
+This repo contains only the documentation and tracklist.
 
 ## Source file
 - **File:** `261025_0303.WAV` (located in parent folder, not moved — 1.4 GB)
